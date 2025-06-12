@@ -4,7 +4,11 @@ All notable changes to the "kubernetes-yaml-formatter" extension will be documen
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
-## 2.3.1 (03 Dec 2024)
+## 2.5.0 (12 Jun 2025)
+
+- Respect range indents when pasting code snippets.
+
+## 2.4.0 (03 Dec 2024)
 
 - add `better-yaml.flowCollectionPadding` option. When true, a single space of padding will be added inside the delimiters of non-empty single-line flow collections. Default true.
 

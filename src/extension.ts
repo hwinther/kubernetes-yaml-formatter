@@ -34,6 +34,8 @@ export function activate(context: vscode.ExtensionContext) {
 
 	vscode.languages.registerDocumentRangeFormattingEditProvider(['yaml', 'helm', 'ansible'], {
 		provideDocumentRangeFormattingEdits: function (document: vscode.TextDocument, range: vscode.Range, options: vscode.FormattingOptions, token: vscode.CancellationToken): vscode.ProviderResult<vscode.TextEdit[]> {
+			console.log(`start ${JSON.stringify(range.start)}, end ${JSON.stringify(range.end)}`);
+			const leftPadding = range.start.character;
 			const txt = document.getText(range);
 
 			let fmtTxt = format(txt, makeFormattingOptions(vscode.workspace.getConfiguration(), options, true),
@@ -43,9 +45,14 @@ export function activate(context: vscode.ExtensionContext) {
 				fmtTxt = fmtTxt.slice(0, -1); // remove last `\n` or it may break the range
 			}
 
-			return [vscode.TextEdit.replace(range, fmtTxt)];
+			return [vscode.TextEdit.replace(range, indent(leftPadding, fmtTxt))];
 		}
 	})
+}
+
+function indent(spaces: number, text: string): string {
+	const pad = ' '.repeat(spaces);
+	return text.replaceAll('\n', '\n' + pad);
 }
 
 function makeFormattingOptions(conf: vscode.WorkspaceConfiguration, options: vscode.FormattingOptions, rangeFormatting: Boolean): YAML.ToStringOptions {
