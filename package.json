@@ -37,7 +37,7 @@
     "Formatters"
   ],
   "engines": {
-    "vscode": "^1.63.0"
+    "vscode": "^1.118.0"
   },
   "activationEvents": [
     "onLanguage:yaml",
@@ -121,13 +121,13 @@
     "watch": "tsc -watch -p ./",
     "watch-web": "webpack --watch",
     "pretest": "npm run compile && npm run lint",
-    "lint": "eslint src --ext ts",
+    "lint": "eslint \"src/**/*.ts\"",
     "test": "vscode-test",
     "package-web": "webpack --mode production --devtool hidden-source-map"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.10",
-    "@types/node": "25.x",
+    "@types/node": "24.x",
     "@types/vscode": "^1.118.0",
     "@typescript-eslint/eslint-plugin": "^8.59.3",
     "@typescript-eslint/parser": "^8.59.3",

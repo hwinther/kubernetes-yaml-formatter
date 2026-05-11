@@ -12,7 +12,7 @@ export function activate(context: vscode.ExtensionContext) {
 	console.log(`Congratulations, your extension "yet-another-better-yaml-formatter" is now active!`);
 
 	vscode.workspace.onDidChangeConfiguration(ev => {
-		console.debug(`onDidChangeConfiguration: ${ev}`)
+		console.debug(`onDidChangeConfiguration: ${ev}`);
 	});
 
 	// 👍 formatter implemented using API
@@ -47,7 +47,7 @@ export function activate(context: vscode.ExtensionContext) {
 
 			return [vscode.TextEdit.replace(range, indent(leftPadding, fmtTxt))];
 		}
-	})
+	});
 }
 
 function indent(spaces: number, text: string): string {
@@ -62,8 +62,8 @@ function makeFormattingOptions(conf: vscode.WorkspaceConfiguration, options: vsc
 		directives: conf.get('better-yaml.directives'),
 		lineWidth: conf.get('better-yaml.lineWidth'),
 		flowCollectionPadding: conf.get('better-yaml.flowCollectionPadding'),
-	}
-	const commentString: string | undefined | null = conf.get('better-yaml.commentString')
+	};
+	const commentString: string | undefined | null = conf.get('better-yaml.commentString');
 	if (commentString !== null && commentString !== undefined) {
 		op.commentString = (comment: string) => commentString + comment;
 	}
@@ -78,7 +78,7 @@ function makeFormattingOptions(conf: vscode.WorkspaceConfiguration, options: vsc
 function makeDocumentOptions(conf: vscode.WorkspaceConfiguration): YAML.DocumentOptions {
 	let op: YAML.DocumentOptions = {
 		version: conf.get('better-yaml.documentOptions.version')
-	}
+	};
 	return op;
 }
 

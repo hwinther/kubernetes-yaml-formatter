@@ -133,3 +133,4 @@ dist
 
 bin/
 *.vsix
+.claude/
