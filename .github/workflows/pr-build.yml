@@ -21,5 +21,6 @@ jobs:
       node_enabled: true
       node_version: "24.x"
       node_working_directory: "."
+      node_changes_regex: ".*"
       node_registry_url: "https://registry.npmjs.org"
       node_test_enabled: true
