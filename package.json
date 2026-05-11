@@ -1,37 +1,37 @@
 {
   "name": "kubernetes-yaml-formatter",
-  "displayName": "Better YAML Formatter",
+  "displayName": "(yet another) Better YAML Formatter",
   "icon": "images/icon.png",
-  "description": "A better YAML formatter",
-  "version": "2.0.0",
-  "publisher": "kennylong",
+  "description": "A (yet another) better YAML formatter",
+  "version": "0.1.0",
+  "publisher": "hwinther",
   "repository": {
-    "url": "https://github.com/longkai/kubernetes-yaml-formatter.git",
+    "url": "https://github.com/hwinther/kubernetes-yaml-formatter.git",
     "type": "git"
   },
   "license": "SEE LICENSE IN LICENSE.txt",
-  "homepage": "https://kennylong.io",
+  "homepage": "https://github.com/hwinther/kubernetes-yaml-formatter",
   "badges": [
     {
       "description": "Github Actions",
-      "href": "https://github.com/longkai/kubernetes-yaml-formatter",
-      "url": "https://github.com/longkaikubernetes-yaml-formatter/actions/workflows/release.yaml/badge.svg"
+      "href": "https://github.com/hwinther/kubernetes-yaml-formatter",
+      "url": "https://github.com/hwinther/kubernetes-yaml-formatter/actions/workflows/release.yaml/badge.svg"
     }
   ],
   "author": {
-    "email": "im.longkai@gmail.com",
-    "name": "Kennylong",
-    "url": "https://kennylong.io"
+    "email": "hwinther@wsh.no",
+    "name": "Hans Christian Winther-Sørensen"
   },
   "keywords": [
     "YAML",
     "CI/CD",
     "DevOps",
     "Formatter",
-    "Kubernetes"
+    "Kubernetes",
+    "GitHub Actions"
   ],
   "bugs": {
-    "url": "https://github.com/longkai/kubernetes-yaml-formatter/issues"
+    "url": "https://github.com/hwinther/kubernetes-yaml-formatter/issues"
   },
   "categories": [
     "Formatters"
@@ -42,7 +42,8 @@
   "activationEvents": [
     "onLanguage:yaml",
     "onLanguage:helm",
-    "onLanguage:ansible"
+    "onLanguage:ansible",
+    "onLanguage:github-actions-workflow"
   ],
   "main": "./out/extension.js",
   "browser": "./dist/web/extension.js",
@@ -96,15 +97,19 @@
     },
     "configurationDefaults": {
       "[yaml]": {
-        "editor.defaultFormatter": "kennylong.kubernetes-yaml-formatter",
+        "editor.defaultFormatter": "hwinther.kubernetes-yaml-formatter",
         "editor.formatOnSave": true
       },
       "[helm]": {
-        "editor.defaultFormatter": "kennylong.kubernetes-yaml-formatter",
+        "editor.defaultFormatter": "hwinther.kubernetes-yaml-formatter",
         "editor.formatOnSave": false
       },
       "[ansible]": {
-        "editor.defaultFormatter": "kennylong.kubernetes-yaml-formatter",
+        "editor.defaultFormatter": "hwinther.kubernetes-yaml-formatter",
+        "editor.formatOnSave": false
+      },
+      "[github-actions-workflow]": {
+        "editor.defaultFormatter": "hwinther.kubernetes-yaml-formatter",
         "editor.formatOnSave": false
       }
     }

@@ -4,6 +4,14 @@ All notable changes to the "kubernetes-yaml-formatter" extension will be documen
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## 0.1.0 (11 May 2026)
+
+First release under the `hwinther` publisher (fork of [longkai/kubernetes-yaml-formatter](https://github.com/longkai/kubernetes-yaml-formatter)). Version reset to reflect a new Marketplace listing.
+
+- Add `github-actions-workflow` to supported language IDs so the formatter activates on files under `.github/workflows/` when the GitHub Actions extension is installed.
+
+## Prior history (upstream `kennylong.kubernetes-yaml-formatter`)
+
 ## 2.5.0 (12 Jun 2025)
 
 - Respect range indents when pasting code snippets.

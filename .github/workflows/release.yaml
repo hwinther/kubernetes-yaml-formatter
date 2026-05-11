@@ -3,7 +3,7 @@ name: Release to Visual Studio Code Extension Marketplace
 on:
   release:
     types:
-    - published
+      - published
 
 jobs:
   package:
@@ -11,30 +11,35 @@ jobs:
     runs-on: ubuntu-latest
     if: success() && startsWith(github.ref, 'refs/tags/')
     steps:
-    - name: checkout extension repo
-      uses: actions/checkout@v4
-      with:
-        fetch-depth: 0
-        ref: ${{ github.ref }}
-    - name: Set up Git configuration
-      run: |
-        git config --global user.name "${{ github.actor }}"
-        git config --global user.email "${{ github.event.pusher.email }}"
-    - name: setup nodejs
-      uses: actions/setup-node@v4
-      with:
-        node-version: 22
-    - name: npm install
-      run: npm install
-    - name: Publish Pre-release to the Marketplace
-      run: |
-        npx vsce publish ${{ github.ref_name }} --pre-release
-      if: "github.event.release.prerelease"
-      env:
-        VSCE_PAT: ${{ secrets.VSCE_PAT }}
-    - name: Publish to the Marketplace
-      run: |
-        npx vsce publish ${{ github.ref_name }}
-      if: "!github.event.release.prerelease"
-      env:
-        VSCE_PAT: ${{ secrets.VSCE_PAT }}
+      - name: checkout extension repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.ref }}
+
+      - name: Set up Git configuration
+        run: |
+          git config --global user.name "${{ github.actor }}"
+          git config --global user.email "${{ github.event.pusher.email }}"
+
+      - name: setup nodejs
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: npm install
+        run: npm install
+
+      - name: Publish Pre-release to the Marketplace
+        run: |
+          npx vsce publish ${{ github.ref_name }} --pre-release
+        if: "github.event.release.prerelease"
+        env:
+          VSCE_PAT: ${{ secrets.VSCE_PAT }}
+
+      - name: Publish to the Marketplace
+        run: |
+          npx vsce publish ${{ github.ref_name }}
+        if: "!github.event.release.prerelease"
+        env:
+          VSCE_PAT: ${{ secrets.VSCE_PAT }}
