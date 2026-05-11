@@ -23,7 +23,7 @@ jobs:
           git config --global user.email "${{ github.event.pusher.email }}"
 
       - name: setup nodejs
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: 22
 
