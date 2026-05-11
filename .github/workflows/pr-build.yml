@@ -1,0 +1,23 @@
+name: PR build
+
+on:
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  pull-requests: write
+  checks: write
+
+jobs:
+  pr-build:
+    uses: hwinther/reusable-workflows/.github/workflows/pr-build.yml@v1
+    with:
+      node_enabled: true
+      node_version: "24.x"
+      node_registry_url: "https://registry.npmjs.org"
+      node_test_enabled: false
