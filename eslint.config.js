@@ -6,7 +6,7 @@ module.exports = [
 		ignores: ['out/**', 'dist/**', '**/*.d.ts']
 	},
 	{
-		files: ['src/**/*.ts'],
+		files: ['src/**/*.ts', 'tests/**/*.ts'],
 		languageOptions: {
 			parser: tsparser,
 			ecmaVersion: 2022,

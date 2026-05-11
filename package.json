@@ -121,29 +121,32 @@
     "watch": "tsc -watch -p ./",
     "watch-web": "webpack --watch",
     "pretest": "npm run compile && npm run lint",
-    "lint": "eslint \"src/**/*.ts\"",
+    "lint": "eslint \"src/**/*.ts\" \"tests/**/*.ts\"",
     "test": "vscode-test",
     "package-web": "webpack --mode production --devtool hidden-source-map",
     "typecheck": "tsc --noEmit -p ./",
     "build": "npm run compile && npm run compile-web",
-    "lint:ci": "eslint \"src/**/*.ts\" -f json"
+    "lint:ci": "eslint \"src/**/*.ts\" \"tests/**/*.ts\" -f json",
+    "coverage:ci": "vitest run --coverage --reporter=default --reporter=json --reporter=junit --outputFile.json=coverage/json-report.json --outputFile.junit=coverage/junit-report.xml"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.10",
     "@types/node": "24.x",
     "@types/vscode": "^1.118.0",
+    "@types/webpack-env": "^1.18.8",
     "@typescript-eslint/eslint-plugin": "^8.59.3",
     "@typescript-eslint/parser": "^8.59.3",
+    "@vitest/coverage-v8": "^4.1.6",
     "@vscode/test-cli": "^0.0.12",
     "@vscode/test-electron": "^2.5.2",
-    "eslint": "^10.3.0",
-    "typescript": "^6.0.3",
-    "ts-loader": "^9.5.7",
-    "webpack": "^5.106.2",
-    "webpack-cli": "^7.0.2",
-    "@types/webpack-env": "^1.18.8",
     "assert": "^2.1.0",
-    "process": "^0.11.10"
+    "eslint": "^10.3.0",
+    "process": "^0.11.10",
+    "ts-loader": "^9.5.7",
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.6",
+    "webpack": "^5.106.2",
+    "webpack-cli": "^7.0.2"
   },
   "dependencies": {
     "yaml": "^2.9.0"
