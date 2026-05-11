@@ -126,13 +126,13 @@
     "package-web": "webpack --mode production --devtool hidden-source-map"
   },
   "devDependencies": {
-    "@types/mocha": "^10.0.7",
+    "@types/mocha": "^10.0.10",
     "@types/node": "25.x",
     "@types/vscode": "^1.118.0",
     "@typescript-eslint/eslint-plugin": "^8.59.3",
     "@typescript-eslint/parser": "^8.59.3",
-    "@vscode/test-cli": "^0.0.9",
-    "@vscode/test-electron": "^2.4.0",
+    "@vscode/test-cli": "^0.0.12",
+    "@vscode/test-electron": "^2.5.2",
     "eslint": "^10.3.0",
     "typescript": "^6.0.3",
     "ts-loader": "^9.5.7",
