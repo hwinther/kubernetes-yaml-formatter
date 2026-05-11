@@ -135,9 +135,9 @@
     "@vscode/test-electron": "^2.4.0",
     "eslint": "^10.3.0",
     "typescript": "^6.0.3",
-    "ts-loader": "^9.5.1",
-    "webpack": "^5.92.1",
-    "webpack-cli": "^5.1.4",
+    "ts-loader": "^9.5.7",
+    "webpack": "^5.106.2",
+    "webpack-cli": "^7.0.2",
     "@types/webpack-env": "^1.18.8",
     "assert": "^2.1.0",
     "process": "^0.11.10"
