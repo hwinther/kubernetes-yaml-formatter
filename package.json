@@ -1,5 +1,5 @@
 {
-  "name": "kubernetes-yaml-formatter",
+  "name": "yet-another-better-yaml-formatter",
   "displayName": "(yet another) Better YAML Formatter",
   "icon": "images/icon.png",
   "description": "A (yet another) better YAML formatter",
@@ -97,19 +97,19 @@
     },
     "configurationDefaults": {
       "[yaml]": {
-        "editor.defaultFormatter": "hwinther.kubernetes-yaml-formatter",
+        "editor.defaultFormatter": "hwinther.yet-another-better-yaml-formatter",
         "editor.formatOnSave": true
       },
       "[helm]": {
-        "editor.defaultFormatter": "hwinther.kubernetes-yaml-formatter",
+        "editor.defaultFormatter": "hwinther.yet-another-better-yaml-formatter",
         "editor.formatOnSave": false
       },
       "[ansible]": {
-        "editor.defaultFormatter": "hwinther.kubernetes-yaml-formatter",
+        "editor.defaultFormatter": "hwinther.yet-another-better-yaml-formatter",
         "editor.formatOnSave": false
       },
       "[github-actions-workflow]": {
-        "editor.defaultFormatter": "hwinther.kubernetes-yaml-formatter",
+        "editor.defaultFormatter": "hwinther.yet-another-better-yaml-formatter",
         "editor.formatOnSave": false
       }
     }

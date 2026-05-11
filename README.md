@@ -6,7 +6,7 @@ Credit goes to kennylong for the original version, I have merely added github-ac
 
 ## Original readme
 
-A [Visual Studio Code extension](https://marketplace.visualstudio.com/items?itemName=hwinther.kubernetes-yaml-formatter) that provides format support for [YAML](https://yaml.org) language.
+A [Visual Studio Code extension](https://marketplace.visualstudio.com/items?itemName=hwinther.yet-another-better-yaml-formatter) that provides format support for [YAML](https://yaml.org) language.
 
 Frustrated of the builtin formatter with its own [option philosophy](https://prettier.io/docs/en/option-philosophy.html)?
 
