@@ -1,45 +1,66 @@
 name: Release to Visual Studio Code Extension Marketplace
 
+# Marketplace pre-release convention (per VS Code docs):
+#   even minor = stable     (0.2.x, 0.4.x, 1.0.x, ...)
+#   odd  minor = pre-release (0.3.x, 0.5.x, 1.1.x, ...)
+# Versions are plain major.minor.patch — semver pre-release suffixes like -rc1 are NOT supported.
+
 on:
-  release:
-    types:
-      - published
+  push:
+    tags:
+      - '[0-9]+.[0-9]+.[0-9]+'
+
+permissions:
+  contents: read
 
 jobs:
-  package:
-    name: Package VS Code Extension and Publish to the Marketplace
+  publish:
+    name: Publish to Marketplace
     runs-on: ubuntu-latest
-    if: success() && startsWith(github.ref, 'refs/tags/')
     steps:
-      - name: checkout extension repo
+      - name: Checkout
         uses: actions/checkout@v6
         with:
-          fetch-depth: 0
-          ref: ${{ github.ref }}
+          persist-credentials: false
 
-      - name: Set up Git configuration
-        run: |
-          git config --global user.name "${{ github.actor }}"
-          git config --global user.email "${{ github.event.pusher.email }}"
-
-      - name: setup nodejs
+      - name: Setup Node
         uses: actions/setup-node@v6
         with:
           node-version: 22
+          cache: npm
 
-      - name: npm install
-        run: npm install
-
-      - name: Publish Pre-release to the Marketplace
+      - name: Verify package.json version matches tag
         run: |
-          npx vsce publish ${{ github.ref_name }} --pre-release
-        if: "github.event.release.prerelease"
+          PKG_VERSION=$(node -p "require('./package.json').version")
+          TAG_VERSION="${{ github.ref_name }}"
+          if [ "$PKG_VERSION" != "$TAG_VERSION" ]; then
+            echo "::error::package.json version ($PKG_VERSION) does not match tag ($TAG_VERSION). Bump package.json before tagging."
+            exit 1
+          fi
+
+      - name: Determine release channel
+        id: channel
+        run: |
+          MINOR=$(echo "${{ github.ref_name }}" | cut -d. -f2)
+          if [ $((MINOR % 2)) -eq 1 ]; then
+            echo "prerelease=true" >> "$GITHUB_OUTPUT"
+            echo "Detected odd minor ($MINOR) → publishing as pre-release"
+          else
+            echo "prerelease=false" >> "$GITHUB_OUTPUT"
+            echo "Detected even minor ($MINOR) → publishing as stable"
+          fi
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Publish (pre-release)
+        if: steps.channel.outputs.prerelease == 'true'
+        run: npx vsce publish --pre-release
         env:
           VSCE_PAT: ${{ secrets.VSCE_PAT }}
 
-      - name: Publish to the Marketplace
-        run: |
-          npx vsce publish ${{ github.ref_name }}
-        if: "!github.event.release.prerelease"
+      - name: Publish (stable)
+        if: steps.channel.outputs.prerelease == 'false'
+        run: npx vsce publish
         env:
           VSCE_PAT: ${{ secrets.VSCE_PAT }}

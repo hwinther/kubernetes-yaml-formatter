@@ -4,6 +4,10 @@ All notable changes to the "yet-another-better-yaml-formatter" extension will be
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## 0.2.0 (12 May 2026)
+
+Updated to node 24 and updated all dependencies.
+
 ## 0.1.0 (11 May 2026)
 
 First release under the `hwinther` publisher (fork of [longkai/kubernetes-yaml-formatter](https://github.com/longkai/kubernetes-yaml-formatter)). Version reset to reflect a new Marketplace listing.
