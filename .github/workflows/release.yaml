@@ -55,12 +55,12 @@ jobs:
 
       - name: Publish (pre-release)
         if: steps.channel.outputs.prerelease == 'true'
-        run: npx @vscode/vsce publish --pre-release
+        run: npx vsce publish --pre-release
         env:
           VSCE_PAT: ${{ secrets.VSCE_PAT }}
 
       - name: Publish (stable)
         if: steps.channel.outputs.prerelease == 'false'
-        run: npx @vscode/vsce publish
+        run: npx vsce publish
         env:
           VSCE_PAT: ${{ secrets.VSCE_PAT }}
