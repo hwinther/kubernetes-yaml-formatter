@@ -4,6 +4,10 @@ All notable changes to the "yet-another-better-yaml-formatter" extension will be
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## 0.2.1 (14 May 2026)
+
+Now also published to Open VSX registry.
+
 ## 0.2.0 (12 May 2026)
 
 Updated to node 24 and updated all dependencies.

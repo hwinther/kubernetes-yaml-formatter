@@ -3,7 +3,7 @@
   "displayName": "(yet another) Better YAML Formatter",
   "icon": "images/icon.png",
   "description": "A (yet another) better YAML formatter",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "publisher": "hwinther",
   "repository": {
     "url": "https://github.com/hwinther/kubernetes-yaml-formatter.git",
