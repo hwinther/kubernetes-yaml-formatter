@@ -1,4 +1,4 @@
-name: Release to Visual Studio Code Extension Marketplace
+name: Release to Visual Studio Code Extension Marketplace and Open VSX
 
 # Marketplace pre-release convention (per VS Code docs):
 #   even minor = stable     (0.2.x, 0.4.x, 1.0.x, ...)
@@ -15,7 +15,7 @@ permissions:
 
 jobs:
   publish:
-    name: Publish to Marketplace
+    name: Publish to Marketplace and Open VSX
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -53,14 +53,34 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Publish (pre-release)
+      - name: Package extension (pre-release)
         if: steps.channel.outputs.prerelease == 'true'
-        run: npx vsce publish --pre-release
+        run: npx vsce package --pre-release --out extension.vsix
+
+      - name: Package extension (stable)
+        if: steps.channel.outputs.prerelease == 'false'
+        run: npx vsce package --out extension.vsix
+
+      - name: Publish to Marketplace (pre-release)
+        if: steps.channel.outputs.prerelease == 'true'
+        run: npx vsce publish --pre-release --packagePath extension.vsix
         env:
           VSCE_PAT: ${{ secrets.VSCE_PAT }}
 
-      - name: Publish (stable)
+      - name: Publish to Marketplace (stable)
         if: steps.channel.outputs.prerelease == 'false'
-        run: npx vsce publish
+        run: npx vsce publish --packagePath extension.vsix
         env:
           VSCE_PAT: ${{ secrets.VSCE_PAT }}
+
+      - name: Publish to Open VSX (pre-release)
+        if: steps.channel.outputs.prerelease == 'true'
+        run: npx ovsx publish --pre-release extension.vsix
+        env:
+          OVSX_PAT: ${{ secrets.OVSX_PAT }}
+
+      - name: Publish to Open VSX (stable)
+        if: steps.channel.outputs.prerelease == 'false'
+        run: npx ovsx publish extension.vsix
+        env:
+          OVSX_PAT: ${{ secrets.OVSX_PAT }}

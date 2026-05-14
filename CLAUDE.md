@@ -48,4 +48,4 @@ The extension ships as a dual-target build:
 
 ## Release
 
-`.github/workflows/release.yaml` publishes to the Marketplace via `vsce publish <tag>` when a GitHub Release is published. Pre-releases use `--pre-release`. The workflow needs the `VSCE_PAT` secret. Bump `version` in `package.json` and add an entry to `CHANGELOG.md` before tagging.
+`.github/workflows/release.yaml` packages the extension once with `vsce package` and publishes the same `.vsix` to both the VS Code Marketplace (`vsce publish --packagePath`) and Open VSX (`ovsx publish`) when a tag matching `[0-9]+.[0-9]+.[0-9]+` is pushed. Pre-releases (odd minor) use `--pre-release` on both. The workflow needs the `VSCE_PAT` and `OVSX_PAT` secrets. Bump `version` in `package.json` and add an entry to `CHANGELOG.md` before tagging.
