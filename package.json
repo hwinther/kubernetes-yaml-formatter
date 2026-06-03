@@ -142,7 +142,7 @@
     "esbuild": "^0.28.0",
     "eslint": "^10.3.0",
     "typescript": "^6.0.3",
-    "vitest": "^4.1.6"
+    "vitest": "^4.1.8"
   },
   "dependencies": {
     "yaml": "^2.9.0"
