@@ -5,6 +5,10 @@ updates:
     schedule:
       interval: weekly
     open-pull-requests-limit: 10
+    ignore:
+      # @types/vscode must stay <= engines.vscode (vsce enforces this), so it is
+      # bumped manually alongside the engine floor rather than by Dependabot.
+      - dependency-name: "@types/vscode"
     groups:
       types:
         patterns:
