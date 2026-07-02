@@ -4,6 +4,10 @@ All notable changes to the "yet-another-better-yaml-formatter" extension will be
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## 0.2.2 (02 July 2026)
+
+- Lower the minimum required VS Code version (`engines.vscode`) back to `^1.63.0`. It had been raised to `^1.118.0`, which blocked installation on editors that bundle an older VS Code (e.g. Cursor, VSCodium) even though the extension only uses long-stable formatter APIs.
+
 ## 0.2.1 (14 May 2026)
 
 Now also published to Open VSX registry.
