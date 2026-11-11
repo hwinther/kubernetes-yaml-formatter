@@ -1,5 +1,7 @@
-name: PR build
+name: CI
 
+# Named CI, as in the other repos: the synced Dependabot auto-merge re-checks PRs when "CI" completes.
+#
 # Lint, build and the vitest suite via the reusable pr-build workflow. On pushes to main it also runs
 # (every enabled stack builds regardless of changes) and publishes the quality artifact, whose
 # quality-summary workflow artifact feeds the wshno/devops repository report.

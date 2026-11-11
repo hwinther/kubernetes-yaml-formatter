@@ -18,7 +18,7 @@ npx vitest run          # unit tests in tests/ (src/formatter.ts)
 npm test                # pretest (compile + lint), then the integration tests in VS Code
 ```
 
-`npm test` runs against the bundled extension in `dist/`, so run `npm run build` first. `vscode-test` discovers compiled tests at `out/test/**/*.test.js` (see `.vscode-test.mjs`). `vscode:prepublish` runs typecheck and the production bundle. CI (pr-build) runs typecheck, build, lint, the unit tests with coverage, Prettier, `vsce package` and the integration tests under xvfb.
+`npm test` runs against the bundled extension in `dist/`, so run `npm run build` first. `vscode-test` discovers compiled tests at `out/test/**/*.test.js` (see `.vscode-test.mjs`). `vscode:prepublish` runs typecheck and the production bundle. CI (`.github/workflows/ci.yml`, the reusable pr-build) runs typecheck, build, lint, the unit tests with coverage, Prettier, `vsce package` and the integration tests under xvfb.
 
 TypeScript, ESLint and Prettier configs come from wshno/frontend-packages (`@wshno/tsconfig`, `@wshno/eslint-config`, `@wshno/prettier-config`); TypeScript stays below 6.1 for typescript-eslint.
 
