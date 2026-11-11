@@ -18,6 +18,8 @@ jobs:
     name: Publish to Marketplace and Open VSX
     runs-on: ubuntu-latest
     environment: publish
+    outputs:
+      prerelease: ${{ steps.channel.outputs.prerelease }}
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -31,9 +33,10 @@ jobs:
           cache: npm
 
       - name: Verify package.json version matches tag
+        env:
+          TAG_VERSION: ${{ github.ref_name }}
         run: |
           PKG_VERSION=$(node -p "require('./package.json').version")
-          TAG_VERSION="${{ github.ref_name }}"
           if [ "$PKG_VERSION" != "$TAG_VERSION" ]; then
             echo "::error::package.json version ($PKG_VERSION) does not match tag ($TAG_VERSION). Bump package.json before tagging."
             exit 1
@@ -41,8 +44,10 @@ jobs:
 
       - name: Determine release channel
         id: channel
+        env:
+          TAG: ${{ github.ref_name }}
         run: |
-          MINOR=$(echo "${{ github.ref_name }}" | cut -d. -f2)
+          MINOR=$(echo "$TAG" | cut -d. -f2)
           if [ $((MINOR % 2)) -eq 1 ]; then
             echo "prerelease=true" >> "$GITHUB_OUTPUT"
             echo "Detected odd minor ($MINOR) → publishing as pre-release"
@@ -85,3 +90,28 @@ jobs:
         run: npx ovsx publish extension.vsix
         env:
           OVSX_PAT: ${{ secrets.OVSX_PAT }}
+
+  # The GitHub release, with notes generated from the merged PRs and grouped by their type label
+  # (.github/release.yml, synced from wshno/devops). Skipped when a release for the tag was already
+  # created by hand.
+  github-release:
+    name: GitHub release
+    needs: [publish]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Create the release with generated notes
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          TAG: ${{ github.ref_name }}
+          PRERELEASE: ${{ needs.publish.outputs.prerelease }}
+        run: |
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo "Release $TAG already exists, leaving it as it is."
+            exit 0
+          fi
+          args=(--verify-tag --generate-notes --title "$TAG")
+          if [ "$PRERELEASE" = "true" ]; then args+=(--prerelease); fi
+          gh release create "$TAG" "${args[@]}"
