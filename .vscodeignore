@@ -21,3 +21,4 @@ vitest.config.ts
 eslint.config.mjs
 .prettierignore
 .vscode-test.mjs
+.poutine.yml
