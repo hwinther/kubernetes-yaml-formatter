@@ -14,8 +14,10 @@ coverage/**
 vsc-extension-quickstart.md
 esbuild.mjs
 vitest.config.ts
-eslint.config.js
 **/tsconfig*.json
 **/.eslintrc.json
 **/*.map
 **/*.ts
+eslint.config.mjs
+.prettierignore
+.vscode-test.mjs

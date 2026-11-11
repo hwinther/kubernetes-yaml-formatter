@@ -42,10 +42,10 @@ spec:
         app: nginx
     spec:
       containers:
-      - name: nginx
-        image: nginx:latest
-        ports:
-        - containerPort: 80
+        - name: nginx
+          image: nginx:latest
+          ports:
+            - containerPort: 80
 ```
 
 As you see, the sequence style(`containers` and `ports`) in the k8s style yaml has no indent. Each time you play with [kubectl](https://kubernetes.io/docs/reference/kubectl/), there is no indent. Not to mention some tool like [kustomize](https://github.com/kubernetes-sigs/kustomize) [requires you do that](https://github.com/kubernetes-sigs/kustomize/issues/3946).
@@ -60,12 +60,12 @@ It's tedious. So I create this extension to make life easier.
 
 This extension contributes the following settings:
 
-* `better-yaml.directives`: Whether block sequences should be indented.
-* `better-yaml.directives`: Include directives in the output. If true, at least the document-start marker --- is always included. If false, no directives or marker is ever included. If null, directives and marker may be included if required.
-* `better-yaml.commentString`: Change the comment prefix string. By default, empty comment lines are left empty, lines consisting of a single space are replaced by `#`, and all other lines are prefixed with a `#`.
-* `better-yaml.lineWidth`: Maximum line width (set to 0 to disable folding). This is a soft limit, as only double-quoted semantics allow for inserting a line break in the middle of a word.
-* `better-yaml.flowCollectionPadding`: When true, a single space of padding will be added inside the delimiters of non-empty single-line flow collections.
-* `better-yaml.documentOptions.version`: The YAML version used by documents without a %YAML directive. Must be '1.1' or '1.2'. Default to '1.2'.
+- `better-yaml.directives`: Whether block sequences should be indented.
+- `better-yaml.directives`: Include directives in the output. If true, at least the document-start marker --- is always included. If false, no directives or marker is ever included. If null, directives and marker may be included if required.
+- `better-yaml.commentString`: Change the comment prefix string. By default, empty comment lines are left empty, lines consisting of a single space are replaced by `#`, and all other lines are prefixed with a `#`.
+- `better-yaml.lineWidth`: Maximum line width (set to 0 to disable folding). This is a soft limit, as only double-quoted semantics allow for inserting a line break in the middle of a word.
+- `better-yaml.flowCollectionPadding`: When true, a single space of padding will be added inside the delimiters of non-empty single-line flow collections.
+- `better-yaml.documentOptions.version`: The YAML version used by documents without a %YAML directive. Must be '1.1' or '1.2'. Default to '1.2'.
 
 ## Thanks
 
@@ -73,7 +73,7 @@ Thanks [lupengpeng](https://github.com/iamlupeng1991) for the icon design. It's 
 
 Many thanks the following projects:
 
-* [eemeli/yaml](https://github.com/eemeli/yaml)
+- [eemeli/yaml](https://github.com/eemeli/yaml)
 
 Without them there wouldn't be this extension.
 

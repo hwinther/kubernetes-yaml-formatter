@@ -122,29 +122,35 @@
     "bundle:prod": "node esbuild.mjs --production",
     "watch": "tsc -watch -p ./",
     "pretest": "npm run compile && npm run lint",
-    "lint": "eslint \"src/**/*.ts\" \"tests/**/*.ts\"",
+    "lint": "eslint .",
     "test": "vscode-test",
     "typecheck": "tsc --noEmit -p ./",
     "build": "npm run typecheck && npm run bundle",
-    "lint:ci": "eslint \"src/**/*.ts\" \"tests/**/*.ts\" -f json",
-    "coverage:ci": "vitest run --coverage --reporter=default --reporter=json --reporter=junit --outputFile.json=coverage/json-report.json --outputFile.junit=coverage/junit-report.xml"
+    "lint:ci": "eslint . -f json",
+    "coverage:ci": "vitest run --coverage --reporter=default --reporter=json --reporter=junit --outputFile.json=coverage/json-report.json --outputFile.junit=coverage/junit-report.xml",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "devDependencies": {
     "@types/mocha": "^10.0.10",
     "@types/node": "25.x",
     "@types/vscode": "^1.63.0",
-    "@typescript-eslint/eslint-plugin": "^8.62.1",
-    "@typescript-eslint/parser": "^8.59.3",
     "@vitest/coverage-v8": "^4.1.9",
     "@vscode/test-cli": "^0.0.15",
     "@vscode/test-electron": "^3.0.0",
     "@vscode/vsce": "^3.9.2",
+    "@wshno/eslint-config": "0.2.0",
+    "@wshno/prettier-config": "0.1.1",
+    "@wshno/tsconfig": "0.1.1",
     "esbuild": "^0.28.1",
     "eslint": "^10.6.0",
+    "globals": "17.13.0",
+    "prettier": "3.9.10",
     "typescript": "^6.0.3",
     "vitest": "^4.1.9"
   },
   "dependencies": {
     "yaml": "^2.9.0"
-  }
+  },
+  "prettier": "@wshno/prettier-config"
 }
