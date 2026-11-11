@@ -1,26 +1,48 @@
 name: PR build
 
+# Lint, build and the vitest suite via the reusable pr-build workflow. On pushes to main it also runs
+# (every enabled stack builds regardless of changes) and publishes the quality artifact, whose
+# quality-summary workflow artifact feeds the wshno/devops repository report.
+
 on:
   pull_request:
     branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
 
 concurrency:
   group: pr-build-caller-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
-permissions:
-  contents: read
-  packages: read
-  pull-requests: write
-  checks: write
+permissions: {}
 
 jobs:
   pr-build:
-    uses: hwinther/reusable-workflows/.github/workflows/pr-build.yml@3b5de55cb09d04c5ee0ddca13297bd22ad2e9170 # v2.16.0
+    permissions:
+      contents: read
+      packages: read
+      pull-requests: write
+      checks: write
+    uses: hwinther/reusable-workflows/.github/workflows/pr-build.yml@5ba6e5a72dec8dcd121cc864279889bb2fa6ed73 # v2.31.0
     with:
       node_enabled: true
-      node_version: "24.x"
-      node_working_directory: "."
-      node_changes_regex: ".*"
-      node_registry_url: "https://registry.npmjs.org"
+      node_version: '24.x'
+      node_working_directory: '.'
+      node_changes_regex: '.*'
+      npm_registry_url: 'https://registry.npmjs.org'
       node_test_enabled: true
+
+  # Test results, coverage and warnings from this run as ghcr.io/hwinther/kubernetes-yaml-formatter/quality:main,
+  # and as the workflow artifact quality-summary. Also runs when the build failed, so failures are reported.
+  quality:
+    needs: [pr-build]
+    if: ${{ !cancelled() && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+    uses: hwinther/reusable-workflows/.github/workflows/quality-artifact.yml@5ba6e5a72dec8dcd121cc864279889bb2fa6ed73 # v2.31.0
+    with:
+      tags: |
+        main
