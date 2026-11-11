@@ -35,10 +35,10 @@ jobs:
       node_changes_regex: '.*'
       npm_registry_url: 'https://registry.npmjs.org'
       node_test_enabled: true
-      # After typecheck, build, lint and the vitest unit tests: package the extension the way the
+      # After typecheck, build, lint and the vitest unit tests: Prettier, package the extension the way the
       # release does (vsce fails when @types/vscode is newer than engines.vscode, or the manifest is
       # broken), then the integration tests in a real VS Code (xvfb gives it a display).
-      node_extra_command: npx vsce package --out "$RUNNER_TEMP/extension.vsix" && xvfb-run -a npm test
+      node_extra_command: npm run format:check && npx vsce package --out "$RUNNER_TEMP/extension.vsix" && xvfb-run -a npm test
 
   # Test results, coverage and warnings from this run as ghcr.io/hwinther/kubernetes-yaml-formatter/quality:main,
   # and as the workflow artifact quality-summary. Also runs when the build failed, so failures are reported.

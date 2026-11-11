@@ -10,14 +10,17 @@ A VS Code extension ("Better YAML Formatter", publisher `hwinther`) that replace
 
 ```
 npm install
-npm run compile         # tsc -> out/ (desktop entry: out/extension.js)
-npm run compile-web     # webpack -> dist/web/ (browser entry: dist/web/extension.js)
-npm run watch           # tsc --watch
-npm run lint            # eslint src --ext ts
-npm test                # runs pretest (compile + lint) then vscode-test
+npm run build           # typecheck + esbuild -> dist/desktop/ and dist/web/ (package.json main/browser)
+npm run compile         # tsc -> out/ (the integration tests)
+npm run lint            # eslint . (@wshno/eslint-config)
+npm run format:check    # prettier (@wshno/prettier-config: 2 spaces, no semicolons, single quotes)
+npx vitest run          # unit tests in tests/ (src/formatter.ts)
+npm test                # pretest (compile + lint), then the integration tests in VS Code
 ```
 
-`vscode-test` discovers compiled tests at `out/test/**/*.test.js` (see `.vscode-test.js`), so always run `npm run compile` before invoking it directly. `vscode:prepublish` runs both `compile` and `compile-web` — both targets must build cleanly to publish.
+`npm test` runs against the bundled extension in `dist/`, so run `npm run build` first. `vscode-test` discovers compiled tests at `out/test/**/*.test.js` (see `.vscode-test.mjs`). `vscode:prepublish` runs typecheck and the production bundle. CI (pr-build) runs typecheck, build, lint, the unit tests with coverage, Prettier, `vsce package` and the integration tests under xvfb.
+
+TypeScript, ESLint and Prettier configs come from wshno/frontend-packages (`@wshno/tsconfig`, `@wshno/eslint-config`, `@wshno/prettier-config`); TypeScript stays below 6.1 for typescript-eslint.
 
 There is no single-test runner script wired up; pass a Mocha grep through `npx vscode-test --grep "<pattern>"` after compiling.
 

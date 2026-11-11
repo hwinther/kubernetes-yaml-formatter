@@ -8,25 +8,25 @@ updates:
     ignore:
       # @types/vscode must stay <= engines.vscode (vsce enforces this), so it is
       # bumped manually alongside the engine floor rather than by Dependabot.
-      - dependency-name: "@types/vscode"
+      - dependency-name: '@types/vscode'
     groups:
       types:
         patterns:
-          - "@types/*"
+          - '@types/*'
       eslint:
         patterns:
-          - "eslint"
-          - "@typescript-eslint/*"
+          - 'eslint'
+          - '@typescript-eslint/*'
       webpack:
         patterns:
-          - "webpack"
-          - "webpack-cli"
-          - "ts-loader"
+          - 'webpack'
+          - 'webpack-cli'
+          - 'ts-loader'
       vscode-test:
         patterns:
-          - "@vscode/test-cli"
-          - "@vscode/test-electron"
-          - "@types/mocha"
+          - '@vscode/test-cli'
+          - '@vscode/test-electron'
+          - '@types/mocha'
 
   - package-ecosystem: github-actions
     directory: /
