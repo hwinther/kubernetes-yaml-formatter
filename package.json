@@ -135,7 +135,7 @@
     "@types/mocha": "^10.0.10",
     "@types/node": "26.x",
     "@types/vscode": "^1.63.0",
-    "@vitest/coverage-v8": "^4.1.9",
+    "@vitest/coverage-v8": "^5.1.0",
     "@vscode/test-cli": "^0.0.15",
     "@vscode/test-electron": "^3.0.0",
     "@vscode/vsce": "^3.9.2",
@@ -147,7 +147,7 @@
     "globals": "17.14.0",
     "prettier": "3.9.10",
     "typescript": "^6.0.3",
-    "vitest": "^4.1.9"
+    "vitest": "^5.1.0"
   },
   "dependencies": {
     "yaml": "^2.9.0"
